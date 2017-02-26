@@ -31,7 +31,8 @@ public class MoviesLoader extends AsyncTaskLoader<Response> {
 
     @Override
     protected void onStartLoading() {
-        if(response.getMovies()==null || response.getMovies().isEmpty() || sort!=sort_old){
+        if(response.getMovies()==null || response.getMovies().isEmpty()
+                || !sort.equalsIgnoreCase(sort_old)){
             forceLoad();
         } else {
             deliverResult(response);
@@ -68,7 +69,7 @@ public class MoviesLoader extends AsyncTaskLoader<Response> {
     public void deliverResult(Response data) {
         if(response == null)
             response = new Response();
-        if(sort != sort_old) {
+        if(!sort.equalsIgnoreCase(sort_old)) {
             sort_old = sort;
             response.getMovies().clear();
         }
@@ -84,13 +85,14 @@ public class MoviesLoader extends AsyncTaskLoader<Response> {
     @Nullable
     private Response apiCall()  throws IOException {
         Response result = new Response();
-        if(sort == Constants.SORT_FAVORITE) {
+        if(sort.equalsIgnoreCase(Constants.SORT_FAVORITE)) {
             Cursor cursor = getContext().getContentResolver().query(MoviesTable.URI_MOVIES,
                     null, null, null, null);
             if(cursor==null){
                 return result;
             }
             result = MoviesTable.listMoviesFromCursor(cursor);
+            result.setPage(1);
             result.setSort(sort);
             return result;
         }

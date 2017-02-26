@@ -42,7 +42,7 @@ public class ItemListActivity extends AppCompatActivity
     int page;
     int total_pages;
     boolean loading;
-    String sort;
+    String sort="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,8 +174,8 @@ public class ItemListActivity extends AppCompatActivity
         int id = loader.getId();
         Response response = ((MoviesLoader)loader).getLastResponse();
         if (id == R.id.movies_loader) {
-            if(page < data.getPage() || sort != data.getSort()){
-                if(sort != data.getSort()) {
+            if(page < data.getPage() || !sort.equalsIgnoreCase(data.getSort())){
+                if(!sort.equalsIgnoreCase(data.getSort())) {
                     sort = data.getSort();
                     movies.clear();
                 }

@@ -16,7 +16,7 @@ public class JsonParser {
 
     public static List<String> JsonToListReviews(String strJson) {
         List<String> reviews = new ArrayList<String>();
-        if (strJson == "") {
+        if (strJson.equalsIgnoreCase("")) {
             return reviews;
         }
 
@@ -42,7 +42,7 @@ public class JsonParser {
 
     public static List<String> JsonToListVideos(String strJson) {
         List<String> urlVideos = new ArrayList<String>();
-        if (strJson == "") {
+        if (strJson.equalsIgnoreCase("")) {
             return urlVideos;
         }
 
@@ -68,7 +68,7 @@ public class JsonParser {
 
     public static Movie JsonToDetail(String strJson) {
         Movie movie = new Movie();
-        if (strJson == "") {
+        if (strJson.equalsIgnoreCase("")) {
             return movie;
         }
 
@@ -102,7 +102,7 @@ public class JsonParser {
         int total_pages;
         List<Movie> movies = new ArrayList<Movie>();
         Response response = new Response();
-        if(strJson == ""){
+        if(strJson.equalsIgnoreCase("")){
             return response;
         }
         try {
